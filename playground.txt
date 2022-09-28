@@ -1,0 +1,152 @@
+// type user struct {
+// 	name       string
+// 	email      string
+// 	ext        int
+// 	privileged bool
+// }
+
+// type admin struct {
+// 	person user
+// 	level  string
+// }
+
+// func (u user) addNewProprety() {
+
+// }
+
+// type Animal interface {
+// 	Says() string
+// 	NumberOfLegs() int
+// }
+
+// type Dog struct {
+// 	name string
+// 	legs int
+// }
+
+// type Gorilla struct {
+// 	name string
+// 	legs int
+// }
+
+// // Declaration of new type based on an another built-in type
+// type Duration int64
+
+// func (d Dog) Says() string {
+// 	return "Woof!"
+
+// }
+// func (d Dog) NumberOfLegs() int {
+// 	return d.legs
+// }
+
+// func (g Gorilla) Says() string {
+// 	return "Haaaaaw!"
+
+// }
+// func (g Gorilla) NumberOfLegs() int {
+// 	return g.legs
+// }
+// /*var bill user // it's common to use var when you need to indicate that the variable will be initialized to it's zero value
+// 	// but when you need to initialize it with anothe value, use the shorthand
+// 	yousef := user{
+// 		name:       "Yousef",
+// 		email:      "xx",
+// 		ext:        122,
+// 		privileged: true,
+// 	}
+
+// 	// struct literal
+// 	user{
+// 		name:       "omar",
+// 		email:      "xxx",
+// 		ext:        2,
+// 		privileged: false,
+// 	}
+// 	//or
+// 	lisa := user{"lisa", "lisa@gmail.com", 12, true}
+
+// 	fred := admin{
+// 		person: user{
+// 			name:       "lisa",
+// 			email:      "xx",
+// 			ext:        1,
+// 			privileged: true,
+// 		},
+// 		level: "super",
+// 	}
+
+// 	var dur Duration
+// 	dur = int64(1000) // error, because now Duration andd int64 are two distinct types, even though the int64 is the base type for Durations
+// 	// the compiler doesn't implicitily convert values of different types
+
+// 	// pointer to struct
+// 	var p = user{
+// 		name:  "yousef",
+// 		email: "yousef@gmail.com",
+// 	}
+// 	ptr := &p
+// 	fmt.Println((*ptr).name) // we don't need to deference it
+// 	fmt.Println(ptr.name)
+
+// 	p := new(user)
+// 	p.name = "yousef"
+// 	p.email = "yousef@gmail.com"
+
+// 	// anonymous struct
+// 	var a = struct {
+// 		Name string
+// 	}{"Golang"}*/
+
+// 	// var s string = "welcome"
+// 	// s.Trim()
+// 	// fmt.Println(s)
+
+// 	dog := Dog{
+// 		name: "Mike!",
+// 		legs: 2,
+// 	}
+// 	anotherDog := PrintInfo(dog)
+// 	if dog == anotherDog {
+// 		log.Println("They are equal!")
+// 	}
+// 	log.Println(anotherDog)
+
+// 	gorilla := Gorilla{
+// 		name: "Max",
+// 		legs: 4,
+// 	}
+// 	anotherGorilla := PrintInfo(gorilla)
+// 	if gorilla == anotherGorilla {
+// 		log.Println(`Gorillas are equal`)
+// 	}
+// 	// func Trim(s string, cutset string) string {
+// // 	if s == "" || cutset == "" {
+// // 		return s
+// // 	}
+// // 	return TrimFunc(s, makeCutsetFunc(cutset))
+// // }
+
+// // func TrimFunc(s string, cutset string) string {
+
+// // }
+
+// // func makeCutSetFunc(cutset string) string {
+
+// // }
+// // type IP []byte
+
+// // func (ip IP) MarshalText() ([]byte, error) {
+// // 	if len(ip) == 0 {
+// // 		return []byte(""), nil
+// // 	}
+// // 	if len(ip) != IPv4len
+// // }
+
+// func PrintInfo(a Animal) Animal {
+// 	log.Println(a)
+// 	log.Println("This animal says", a.Says(), "and has", a.NumberOfLegs())
+// 	return a
+
+
+all files of a package, must exist in the same directory

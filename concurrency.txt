@@ -1,0 +1,129 @@
+concurrency enables parallelism by designing correct structure
+of concurrency work 
+concurrency is about structure
+parallelism is about execution
+
+Actor Based concurrency model
+
+if actor1 want to communicate with actor2, then actor1 must know actor2 first
+- Needs process ID, maybe from the creation step
+- Puts message on inbox queue, after putting the message on the message queue, actor1 can contiue processing his task without getting blocked if actor2 cannot process the message immediately
+
+CSP, introduces a new entity on the equation [channels]
+channels are a way to communicat between process, because they completely anonymous, in this case we don't need a process id to communicate
+
+process A can send data across the channel to many processes that are completlt transparent to A 
+and process B can receive data from many channels one a at once
+
+
+### Goroutines
+
+- Creating first Goroutine
+- Launching anonymous function
+- Using WaitGroup
+
+In go we achieve concurrency by workig with goroutines, the main routins is considered as a go routine too
+
+goroutines is used in place of Actors [in Actor Based Model]
+they execute some logic, or die or keep looping till neccessary
+3 calls to 3 services to compose a response can be designed concurrently
+and fourth one to receive them and compse the response 
+
+
+pacakge main
+import "time"
+
+func main(){
+    go helloworld(); // main function finishes before helloworld() gets executed, add time.Sleep(time.Second)
+    time.Sleep(time.Second); // sleep the main goroutine for 1 second
+
+    // anonymous goroutines
+    go func(msg string){
+        println(msg);
+    }("Hello world")
+    time.Sleep(time.second)
+
+    // named function
+    messagePrinter := func(msg string){
+        println(msg)
+    }
+    go messagePrinter("Hello world");
+    go messagePrinter("Hello goroutine");
+    time.Sleep(time.Second);
+}
+
+func helloworld(){
+    println("Hello world!")
+}
+
+remember in any application, the main function should'nt finish before the rest of goroutines
+
+
+-- WaitGroup
+helps us syncronize many concurrent goroutines
+everytime we've to wait for one goroutine to finish, we add one to the group
+
+package main(){
+    var wait sync.WaitGroup
+
+    wait.Add(1)
+    go func(){
+        fmt.Println("Hello world");
+        wait.Done(); // at the end and subtract one, or use wait.Add(-1)
+    }()
+
+    wait.Wait(); // will be executed before the goroutine above
+}
+
+
+let me show another example
+
+func main(){
+    var wait sync.WaitGroup
+    goroutines := 5
+    wait.Add(goroutines)
+    for i := 0; i < goroutines; i++ {
+        go func(goroutineID int){
+            fmt.Println("ID:%d Hello goroutine!\n", goroutineID)
+            wait.Done()
+        }(i)
+    }
+    wait.Wait()
+}
+
+
+### Callbacks
+- Async and Sync Callbacks
+
+1. Syncrounous
+package main
+
+func main(){
+    toUpperSync("Hello world", func(v string){
+        fmt.Printf("Callback: %s\n", v)
+    })
+}
+
+func toUpperSync(word string, f func(string)){
+    f(strings.ToUpper(word))
+}
+
+
+2. Async
+
+package main
+var wait sync.WaitGroup
+func main(){
+    wait.Add(1)
+    toUpperAsync("hello Callbacks", func (v string){
+        fmt.Println(v);
+        wait.Done();
+    })
+    println("waiting async response...");
+    wait.Wait();
+}
+func toUpperAsync(word string, f func(string)){
+    go func(){
+        f(strings.ToUpper(word)); //we've wrapped the function inside goroutine
+    }
+}
