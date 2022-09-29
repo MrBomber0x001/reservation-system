@@ -1,6 +1,5 @@
-# intro
-
-Reservation system built on top of Golang
+# Intro
+flexible reservation system / booking software for any business which needs scheduling and managing their bookings
 
 ## Tech stack
 
@@ -9,7 +8,10 @@ Reservation system built on top of Golang
 - frontend `html`, `bootstrap`, `javascript`
 
 ## Project structure
+```
 
+
+```
 ## screenshots
 
 ## testing
